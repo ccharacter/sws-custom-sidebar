@@ -50,21 +50,19 @@ class swsCustomSidebar
 $shortcode=new swsCustomSidebar();
 $shortcode->init();
 
-function sws_customSidebar_metabox( $post ) {
+/*function sws_customSidebar_metabox($post) {
     
     do_meta_boxes( null, 'custom-metabox-holder', $post );
 }
 add_action( 'edit_form_after_title', 'sws_customSidebar_metabox' );
 
-
 function sws_customSidebar_add() {
  
         add_meta_box(
-            'awesome_metabox_id',
-            __( 'This Is Awesome', 'sws-custom-sidebar' ),
+            'sws_sidebar_metabox',
+            __( 'CUSTOM SIDEBAR CONTENT', 'sws-custom-sidebar' ),
             'sws_customSidebar_render',
-            'post',
-            'custom-metabox-holder'    //Look what we have here, a new context
+            'page'
         );
     
 }
@@ -73,13 +71,65 @@ add_action( 'add_meta_boxes', 'sws_customSidebar_add' );
 function sws_customSidebar_render( $post ) {
     
     ?>
-    <div class="awesome-meta-admin">
-        <?php //show something here
-            echo "Having fun!";
-        ?>
+    <div class="sws-custom-sidebar">
+        <label for 'sws-cs-title' id='sws-cs-title' class='
     </div>
 <?php 
 }
+*/
+
+
+
+abstract class WPOrg_Meta_Box
+{
+
+    public static function create($post) {
+
+	do_meta_boxes( null, 'custom-metabox-holder',$post);
+    }
+
+    public static function add()
+    {
+        $screens = ['post','page'];
+        foreach ($screens as $screen) {
+            add_meta_box(
+                'sws-custom-sidebar-id',          // Unique ID
+                'CUSTOM SIDEBAR CONTENT', // Box title
+                [self::class, 'html'],   // Content callback, must be of type callable
+                $screen,		 // post type
+		'custom-metabox-holder'  // context
+            );
+        }
+    }
+ 
+    public static function save($post_id)
+    {
+        if (array_key_exists('wporg_field', $_POST)) {
+            update_post_meta(
+                $post_id,
+                '_wporg_meta_key',
+                $_POST['wporg_field']
+            );
+        }
+    }
+ 
+    public static function html($post)
+    {
+        $value = get_post_meta($post->ID, '_wporg_meta_key', true);
+        ?>
+	<div id='titlediv'>
+	    <div id='titlewrap'>
+		<label class id='title-prompt-text' for 'sws_cs_title'>Sidebar Title</label>
+		<input type='text' name='sws_cs_title' id='sws_cs_title' size='30' spellcheck='true'>
+	    </div>
+	</div>
+<?php
+    }
+}
+ 
+add_action('edit_form_after_title', ['WPOrg_Meta_Box','create']);
+add_action('add_meta_boxes', ['WPOrg_Meta_Box', 'add']);
+add_action('save_post', ['WPOrg_Meta_Box', 'save']);
 	
 
 ?>
