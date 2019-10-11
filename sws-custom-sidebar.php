@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name:       SWS Server Tag
- * Plugin URI:        https://ccharacter.com/custom-plugins/sws-server-tag/
+ * Plugin URI:        https://ccharacter.com/custom-plugins/sws-custom-sidebar/
  * Description:       Create a shortcode that displays the server name in the footer
  * Version:           1.6
  * Requires at least: 5.2
@@ -11,16 +11,16 @@
  * Author URI:        https://ccharacter.com/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       sws-server-tag
+ * Text Domain:       sws-custom-sidebar/
  */
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 require_once plugin_dir_path(__FILE__).'inc/plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://raw.githubusercontent.com/ccharacter/sws-server-tag/master/plugin.json',
+	'https://raw.githubusercontent.com/ccharacter/sws-custom-sidebar/master/plugin.json',
 	__FILE__,
-	'sws-server-tag'
+	'sws-custom-sidebar'
 );
 
 

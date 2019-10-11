@@ -1,9 +1,9 @@
 {
-	"name": "SWS Server Tag",
-	"version": "1.7",
-	"download_url": "https://github.com/ccharacter/sws-server-tag/archive/v1.7.zip",
+	"name": "SWS Custom Sidebar",
+	"version": "1.0",
+	"download_url": "https://github.com/ccharacter/sws-custom-sidebar/archive/v1.0.zip",
 
-	"homepage": "https://ccharacter.com/custom-plugins/sws-server-tag/",
+	"homepage": "https://ccharacter.com/custom-plugins/sws-custom-sidebar/",
 	"requires": "5.2.3",
 	"tested": "5.2.3",
 	"last_updated": "2019-09-25 22:17:00",
