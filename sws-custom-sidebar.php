@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Plugin Name:       SWS Server Tag
+ * Plugin Name:       SWS Custom Sidebar
  * Plugin URI:        https://ccharacter.com/custom-plugins/sws-custom-sidebar/
- * Description:       Create a shortcode that displays the server name in the footer
- * Version:           1.6
+ * Description:       Create page-specific sidebar content
+ * Version:           1.0
  * Requires at least: 5.2
  * Requires PHP:      5.5
  * Author:            Sharon Stromberg
@@ -24,7 +24,7 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 );
 
 
-class DisplayServerName
+class swsCustomSidebar
 {
 	public function showTag($content) {
 		if ( (is_page('home')) || (is_page('about'))) {
@@ -47,7 +47,7 @@ class DisplayServerName
 }
 
 
-$shortcode=new DisplayServerName();
+$shortcode=new swsCustomSidebar();
 $shortcode->init();
 
 ?>
