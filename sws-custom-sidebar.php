@@ -50,4 +50,36 @@ class swsCustomSidebar
 $shortcode=new swsCustomSidebar();
 $shortcode->init();
 
+function sws_customSidebar_metabox( $post ) {
+    
+    do_meta_boxes( null, 'custom-metabox-holder', $post );
+}
+add_action( 'edit_form_after_title', 'sws_customSidebar_metabox' );
+
+
+function sws_customSidebar_add() {
+ 
+        add_meta_box(
+            'awesome_metabox_id',
+            __( 'This Is Awesome', 'sws-custom-sidebar' ),
+            'sws_customSidebar_render',
+            'post',
+            'custom-metabox-holder'    //Look what we have here, a new context
+        );
+    
+}
+add_action( 'add_meta_boxes', 'sws_customSidebar_add' );
+ 
+function sws_customSidebar_render( $post ) {
+    
+    ?>
+    <div class="awesome-meta-admin">
+        <?php //show something here
+            echo "Having fun!";
+        ?>
+    </div>
+<?php 
+}
+	
+
 ?>

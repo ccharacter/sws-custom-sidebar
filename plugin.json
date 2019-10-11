@@ -13,7 +13,7 @@
 	"author_homepage": "http://ccharacter.com/",
 
 	"sections": {
-		"description": "This plugin is designed for contexts where a dev and production server are used, and there is a need to identify which you're looking at. <br /><br />It appends a near-invisible span tag (low opacity) to the CONTENT of the home page and the ABOUT page, if one exists.<br /><br />To insert that tag anywhere you wish, use the shortcode [sws-server-tag]."
+		"description": "This plugin is designed to create page-specific sidebar content that is edited within the page context. If none is present, the default sidebar will be displayed."
 	}
 
 }

@@ -1,1 +1,1 @@
-This is a file.
+This plugin is designed to create page-specific sidebar content that is edited within the page context. If none is present, the default sidebar will be displayed.
