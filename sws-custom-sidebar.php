@@ -24,6 +24,15 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 );
 
 
+// add stylesheets
+function sws_custom_sidebar_enqueue_script() {   
+    wp_register_style( 'swsCustomSidebarCSS', plugin_dir_path(__FILE__).  'assets/style.css',false,'1.0');
+    wp_enqueue_script('swsCustomSidebarCSS');
+}
+add_action('admin_enqueue_scripts', 'sws_custom_sidebar_enqueue_script');
+
+
+
 class swsCustomSidebar
 {
 	public function showTag($content) {
