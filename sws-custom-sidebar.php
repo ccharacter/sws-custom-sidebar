@@ -26,8 +26,7 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 
 // add stylesheets
 function sws_custom_sidebar_enqueue_script() {   
-    wp_register_style( 'swsCustomSidebarCSS', plugin_dir_path(__FILE__).  'assets/style.css',false,'1.0');
-    wp_enqueue_script('swsCustomSidebarCSS');
+    wp_enqueue_script( 'swsCustomSidebarCSS', plugin_dir_url(__FILE__).'assets/style.css',array(),'1.0');
 }
 add_action('admin_enqueue_scripts', 'sws_custom_sidebar_enqueue_script');
 
@@ -128,11 +127,14 @@ abstract class WPOrg_Meta_Box
         ?>
 	<div id='titlediv'>
 	    <div id='titlewrap'>
-		<label class id='title-prompt-text' for 'sws_cs_title'>Sidebar Title</label>
-		<input type='text' name='sws_cs_title' id='sws_cs_title' size='30' spellcheck='true'>
+		<label for='sws_cs_title'>Sidebar Title</label>
+		<input type='text' name='sws_cs_title' id='sws_cs_title'  spellcheck='true'>
 	    </div>
-	</div>
-<?php
+	<div id='contentdiv' class='wp-editor-wrap' data-toolbar='full'>
+	    <div id='contentwrap' class='wp-editor-container'>
+		<textarea name='sws_cs_content' id='sws_cs_content' spellcheck='true'></textarea>
+	</div></div>
+<?php  wp_editor("","sws_cs_content");
     }
 }
  
