@@ -1,5 +1,6 @@
-<style>
-.sws_cs_title, #sws_cs_title { 
+/* CSS Document */
+
+#sws_cs_title { 
 	padding: 3px 8px;
     font-size: 1.7em;
     line-height: 100%;
@@ -11,5 +12,3 @@
 }
 
 #titlewrap { border: 5px solid red !important; background-color: yellow !important; }
-
-</style>
