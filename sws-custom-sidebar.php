@@ -83,20 +83,17 @@ class SWS_Meta_Box
 		);
 	}
         ?>
-<div id='titlewrap'>
-	<label for='sws_cs_title'>Sidebar Title</label>
-	<input type='text' name="sws_cs_flds[top_title]" id='sws_cs_top_title' value="<?php echo wp_unslash($page_fields['top_title']); ?>" spellcheck='true'>
-</div>
-<!--<div id='contentdiv' class='wp-editor-wrap' data-toolbar='full'>
-        <div id='contentwrap' class='wp-editor-container'>
-		<textarea id="code_editor_top_html" rows='5' name="sws_cs_flds[top_html]" aria-hidden="true" class='widefat editor hide-if-no-js'><?php //echo wp_unslash($page_fields['top_html']); ?></textarea>
--	</div>
-</div>
--->	<!--<div id='contentdiv' class='wp-editor-wrap' data-toolbar='full'>
-	    <div id='contentwrap' class='wp-editor-container'>		<textarea name='sws_cs_content' id='sws_cs_content' spellcheck='true'></textarea>
-	</div>
-	</div>-->
-<?php  wp_editor($page_fields['top_html'],"code_editor_top_html",array('textarea_rows'=>5,'textarea_name'=>'sws_cs_flds[top_html]','teeny'=>true));
+<fieldset><h3>Top Section</h3>
+		<h3>Sidebar Title</h3>
+		<input type='text' name="sws_cs_flds[top_title]" id='sws_cs_top_title' value="<?php echo wp_unslash($page_fields['top_title']); ?>" spellcheck='true'>
+	
+<?php  wp_editor($page_fields['top_html'],"code_editor_top_html",array('textarea_rows'=>5,'textarea_name'=>'sws_cs_flds[top_html]')); ?>
+</fieldset>
+<fieldset><h3>Bottom Section</h3>
+<?php  wp_editor($page_fields['bottom_html'],"code_editor_bottom_html",array('textarea_rows'=>5,'textarea_name'=>'sws_cs_flds[bottom_html]')); ?>
+</fieldset>
+
+<?php
     }
 }
  
