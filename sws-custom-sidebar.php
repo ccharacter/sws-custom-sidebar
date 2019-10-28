@@ -4,7 +4,7 @@
  * Plugin Name:       SWS Custom Sidebar
  * Plugin URI:        https://ccharacter.com/custom-plugins/sws-custom-sidebar/
  * Description:       Create page-specific sidebar content
- * Version:           1.0
+ * Version:           1.3
  * Requires at least: 5.2
  * Requires PHP:      5.5
  * Author:            Sharon Stromberg
