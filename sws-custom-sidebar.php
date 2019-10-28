@@ -4,7 +4,7 @@
  * Plugin Name:       SWS Custom Sidebar
  * Plugin URI:        https://ccharacter.com/custom-plugins/sws-custom-sidebar/
  * Description:       Create page-specific sidebar content
- * Version:           1.3
+ * Version:           1.4
  * Requires at least: 5.2
  * Requires PHP:      5.5
  * Author:            Sharon Stromberg
@@ -44,6 +44,13 @@ class SWS_Meta_Box
     public static function create($post) {
 
 	do_meta_boxes( null, 'custom-metabox-holder',$post);
+    }
+
+    public static function genTitle($string="Title") {
+	$string=str_replace("-"," ",$string);
+	$string=str_replace("_"," ",$string);
+	$string=ucwords($string);
+	return $string;
     }
 
     public static function add()
@@ -101,7 +108,7 @@ class SWS_Meta_Box
 	}
 	
 	foreach ($mySidebars as $key=>$val) {
-		$title=ucwords(str_replace('_',' ',$key));
+		$title=self::genTitle($key);
         ?>
 <fieldset><h3><?php echo $title; ?></h3>
 	<div id='titlewrap' style='width:100%; text-align:center; margin-top:-2rem'>	
