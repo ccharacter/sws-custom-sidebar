@@ -75,25 +75,48 @@ class SWS_Meta_Box
  
     public static function add_metabox_html($post)
     {
+	
+	// list widgetized areas
+	//error_log(print_r(get_option('sidebars_widgets'),true),0);
+	$mySidebars=array(); $myFields=array();
+	$widgets=get_option('sidebars_widgets');
+	if (is_array($widgets)) { 
+		foreach ($widgets as $key=>$val) {
+			if (!(strpos($key,'sidebar')===false)) { 
+				$mySidebars[$key]=$val;
+				$myFields[$key]=''; $myFields[$key.'_title']='';
+			}
+		}
+
+	}
+	error_log(print_r($mySidebars,true),0);
+
 	$post_id=$post->ID;
 	$page_fields=get_post_meta($post_id,'_sws_cs_flds',true);
 	if (!($page_fields)) {
-		$page_fields=array(
+		$page_fields=$myFields;
+		/*$page_fields=array(
 			'top_title'=>'', 'top_html'=>'','bottom_html'=>''
-		);
+		);*/
 	}
-        ?>
-<fieldset><h3>Top Section</h3>
-		<h3>Sidebar Title</h3>
-		<input type='text' name="sws_cs_flds[top_title]" id='sws_cs_top_title' value="<?php echo wp_unslash($page_fields['top_title']); ?>" spellcheck='true'>
 	
-<?php  wp_editor($page_fields['top_html'],"code_editor_top_html",array('textarea_rows'=>5,'textarea_name'=>'sws_cs_flds[top_html]')); ?>
+	foreach ($mySidebars as $key=>$val) {
+		$title=ucwords(str_replace('_',' ',$key));
+        ?>
+<fieldset><h3><?php echo $title; ?></h3>
+	<div id='titlewrap' style='width:100%; text-align:center; margin-top:-2rem'>	
+		<label for='sws_cs_<?php echo $key; ?>'>Title (optional)</label>
+		<input type='text' name="sws_cs_flds[<?php echo $key."_title"; ?>]" id='sws_cs_<?php echo $key."_title"; ?>' value="<?php echo wp_unslash($page_fields[$key."_title"]); ?>" spellcheck='true'>
+	</div>	
+<?php  wp_editor($page_fields[$key],"code_editor_".$key,array('textarea_rows'=>5,'textarea_name'=>"sws_cs_flds[$key]")); ?>
 </fieldset>
+<!--
 <fieldset><h3>Bottom Section</h3>
-<?php  wp_editor($page_fields['bottom_html'],"code_editor_bottom_html",array('textarea_rows'=>5,'textarea_name'=>'sws_cs_flds[bottom_html]')); ?>
+<?php // wp_editor($page_fields['bottom_html'],"code_editor_bottom_html",array('textarea_rows'=>5,'textarea_name'=>'sws_cs_flds[bottom_html]')); ?>
 </fieldset>
-
+-->
 <?php
+	}
     }
 }
  
