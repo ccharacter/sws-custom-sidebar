@@ -4,7 +4,7 @@
  * Plugin Name:       SWS Custom Sidebar
  * Plugin URI:        https://ccharacter.com/custom-plugins/sws-custom-sidebar/
  * Description:       Create page-specific sidebar content
- * Version:           1.4
+ * Version:           1.5
  * Requires at least: 5.2
  * Requires PHP:      5.5
  * Author:            Sharon Stromberg
@@ -79,25 +79,37 @@ class SWS_Meta_Box
             );
         }
     }
+
+    public static function list_sidebars($post) {
+	$type=get_post_type($post);
+	$test = $type=="page" ? "post" : "page";		
+	//error_log($type."|".$test,0);
+       // list widgetized areas
+        //error_log(print_r(get_option('sidebars_widgets'),true),0);
+        $mySidebars=array(); $myFields=array();
+        $widgets=get_option('sidebars_widgets');
+        if (is_array($widgets)) {
+                foreach ($widgets as $key=>$val) {
+                        if ((!(strpos($key,'sidebar')===false)) && (strpos($key,$test)===false))  {
+                                $mySidebars[$key]=$val;
+                                $myFields[$key]=''; $myFields[$key.'_title']='';
+                        }
+                }
+
+        }
+        //error_log(print_r($mySidebars,true),0);
+
+	$retArr[]=$mySidebars;
+	$retArr[]=$myFields;
+
+	return $retArr;
+    }
  
     public static function add_metabox_html($post)
     {
-	
-	// list widgetized areas
-	//error_log(print_r(get_option('sidebars_widgets'),true),0);
-	$mySidebars=array(); $myFields=array();
-	$widgets=get_option('sidebars_widgets');
-	if (is_array($widgets)) { 
-		foreach ($widgets as $key=>$val) {
-			if (!(strpos($key,'sidebar')===false)) { 
-				$mySidebars[$key]=$val;
-				$myFields[$key]=''; $myFields[$key.'_title']='';
-			}
-		}
-
-	}
-	error_log(print_r($mySidebars,true),0);
-
+	$sidebarInfo=self::list_sidebars($post);
+	$myFields=$sidebarInfo[1];
+	$mySidebars=$sidebarInfo[0];
 	$post_id=$post->ID;
 	$page_fields=get_post_meta($post_id,'_sws_cs_flds',true);
 	if (!($page_fields)) {
